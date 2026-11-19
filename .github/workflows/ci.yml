@@ -12,13 +12,14 @@ jobs:
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
+      - name: Mostrar data
+        run: date
       - name: Listar arquivos
         run: ls -la
 
   validation:
     name: Validação
     runs-on: ubuntu-latest
-    needs: setup
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -34,7 +35,6 @@ jobs:
   build:
     name: Build (simulado)
     runs-on: ubuntu-latest
-    needs: validation
     steps:
       - name: Checkout código
         uses: actions/checkout@v4
@@ -48,7 +48,6 @@ jobs:
   deploy:
     name: Deploy (informativo)
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: Deploy
         run: echo "Cloudflare fará deploy automaticamente"
